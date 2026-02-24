@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Safetrip Potential Revenue</title>
+  <title>Safetrip® Potential Revenue</title>
   <style>
     :root {
       --blue: #2b6cb0;
@@ -57,16 +57,16 @@
 </head>
 <body>
   <div class="card" role="region" aria-labelledby="title">
-    <h1 id="title">Safetrip Potential Revenue</h1>
-    <div class="subhead">Slide to see revenue between your current year total and your possible (projected) revenue.</div>
+    <h1 id="title">What If You Increased Your Safetrip® Penetration % </h1>
+    <div class="subhead">Slide to see your potential revenue between your current fisical year to date total and your potential revenue.</div>
 
     <div class="row">
       <div class="stat">
-        <div class="label">Total Revenue (Calendar Year)</div>
+        <div class="label">Total Revenue (Current Fisical Year to Date)</div>
         <div class="value" id="totalLabel">$1,309,000</div>
       </div>
       <div class="stat">
-        <div class="label">Possible Revenue</div>
+        <div class="label">Potential Revenue</div>
         <div class="value" id="possibleLabel">$4,000,000</div>
       </div>
     </div>
@@ -74,10 +74,10 @@
 
     <div class="slider-row">
       <div class="slider-header">
-        <div class="left">Progress toward Possible</div>
+        <div class="left">Slide to see Potential Revenue</div>
         <div class="right" aria-live="polite"><span id="percent">0</span>%</div>
       </div>
-      <input id="slider" type="range" min="0" max="100" value="0" step="1" aria-label="Progress toward Possible">
+      <input id="slider" type="range" min="0" max="100" value="0" step="1" aria-label="Slide to see Potential Revenue">
       <div class="minmax">
         <div>Min (Total): <strong id="minLabel">$1,309,000</strong></div>
         <div>Max (Possible): <strong id="maxLabel">$4,000,000</strong></div>
@@ -85,16 +85,16 @@
     </div>
 
     <div class="result">
-      <div class="label">Projected Revenue</div>
+      <div class="label">Total Revenue</div>
       <div class="value" id="projected" aria-live="polite">$1,309,000</div>
       <div class="detail">
         <span class="chip">Increase vs Total: <span id="incPct">0%</span></span>
-        <span class="chip">Dollar Change: <span id="delta">$0</span></span>
+        <span class="chip">Revenue Change: <span id="delta">$0</span></span>
       </div>
     </div>
 
     <div class="defaults" aria-hidden="true">
-      Defaults set in code: Total=<code id="totalDefault">$1,309,000</code>, Possible=<code id="possibleDefault">$4,000,000</code>
+      Defaults set in code: Current Revenue=<code id="totalDefault">$1,309,000</code>, Potential (if 100% of customer transactions had Safetrip®)=<code id="possibleDefault">$4,000,000</code>
     </div>
   </div>
 
@@ -104,6 +104,7 @@
 <script defer src="safetrip-calculator.js?v=1"></script>
 </body>
 </html>
+
 
 
 
