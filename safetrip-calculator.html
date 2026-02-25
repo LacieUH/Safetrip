@@ -72,6 +72,11 @@ h1 {
   margin-top: 4px;
 }
 
+/* ✅ THIS IS THE FIX — makes radio button orange instead of pink */
+input[type="radio"] {
+  accent-color: var(--orange);
+}
+
 /* Slider Section */
 .slider-row {
   margin: 20px 0;
@@ -198,7 +203,7 @@ Slide to estimate revenue based on sales and selected contract type.
 <div class="result">
   <div class="label">Projected Revenue</div>
   <div class="value" id="projected">$0.00</div>
-  <div class="small">Selected Sales × Contract Incomet</div>
+  <div class="small">Selected Sales × Contract Income</div>
 </div>
 
 <div class="footer-note">
@@ -211,6 +216,7 @@ All figures are hypothetical and for estimation purposes only.
 
 </body>
 </html>
+
 
 
 
