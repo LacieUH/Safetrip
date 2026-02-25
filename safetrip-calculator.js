@@ -2,7 +2,7 @@ console.log("Safetrip Calculator Loaded");
 
 // Constants
 const MIN_SALES = 0;
-const MAX_SALES = 15000;
+const MAX_SALES = 30000;
 
 // DOM Elements
 const slider = document.getElementById("slider");
@@ -65,6 +65,7 @@ contractRadios.forEach(radio =>
 
 // Initialize
 updateCalculator();
+
 
 
 
