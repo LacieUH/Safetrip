@@ -1,109 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Safetrip® Potential Revenue</title>
-  <style>
-    :root {
-      --blue: #2b6cb0;
-      --blue-600: #2c5282;
-      --grey-50: #f6f8fb;
-      --grey-100: #eef2f6;
-      --grey-300: #cfd8e3;
-      --grey-700: #3e4c59;
-      --orange: #f29d38;
-      --white: #ffffff;
-    }
-    * { box-sizing: border-box; }
-    body { font-family: Arial, Helvetica, sans-serif; color: var(--grey-700);
-      background: var(--grey-50); margin: 0; padding: 24px; display: grid;
-      place-items: start center; min-height: 100vh; }
-    .card { width: min(720px, 95vw); background: var(--white);
-      border: 1px solid var(--grey-300); border-radius: 12px;
-      padding: 20px 20px 24px; box-shadow: 0 6px 20px rgba(44,82,130,.08); }
-    h1 { color: var(--blue); font-size: 1.4rem; margin: 0 0 6px; letter-spacing: .2px; }
-    .subhead { color: var(--grey-700); opacity: .9; margin-bottom: 16px; }
-    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0 10px; }
-    .stat { background: var(--grey-100); border: 1px solid var(--grey-300);
-      border-radius: 10px; padding: 12px; }
-    .stat .label { color: var(--blue-600); font-weight: 700; font-size: .9rem; margin-bottom: 4px; }
-    .stat .value { font-variant-numeric: tabular-nums; font-weight: 800; color: var(--blue); font-size: 1.1rem; }
-    .slider-row { margin: 14px 0 8px; }
-    .slider-header { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
-    .slider-header .left { font-weight: 700; color: var(--blue-600); }
-    .slider-header .right { font-variant-numeric: tabular-nums; color: var(--grey-700); }
-    input[type="range"] { width: 100%; appearance: none; height: 8px; border-radius: 8px;
-      background: linear-gradient(90deg, var(--blue) 0% 0%, var(--grey-300) 0% 100%); outline: none; }
-    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none;
-      width: 20px; height: 20px; border-radius: 50%; background: var(--orange);
-      border: 2px solid #fff; box-shadow: 0 0 0 2px var(--blue); cursor: pointer; }
-    input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%;
-      background: var(--orange); border: 2px solid #fff; box-shadow: 0 0 0 2px var(--blue); cursor: pointer; }
-    .minmax { display: flex; justify-content: space-between; font-size: .9rem; color: var(--grey-700);
-      margin-top: 6px; font-variant-numeric: tabular-nums; }
-    .result { margin-top: 14px; background: var(--grey-100); border: 1px solid var(--grey-300);
-      border-radius: 10px; padding: 14px; display: grid; gap: 6px; }
-    .result .label { color: var(--blue-600); font-weight: 700; }
-    .result .value { font-size: 1.4rem; font-weight: 800; color: var(--blue); font-variant-numeric: tabular-nums; }
-    .result .detail { font-size: .9rem; color: var(--grey-700); display: flex; gap: 12px; flex-wrap: wrap; }
-    .chip { padding: 4px 8px; background: #e8f0fb; color: var(--blue-600); border-radius: 999px;
-      border: 1px solid #c7dcfb; font-variant-numeric: tabular-nums; }
-    .note { font-size: .85rem; color: var(--orange); margin-top: 8px; display: none; }
-    .defaults { margin-top: 8px; font-size: .8rem; color: #6b7280; }
-    .defaults code { background: #fff7ef; border: 1px solid #f7c892; color: #8a5200;
-      padding: 2px 6px; border-radius: 6px; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Safetrip® Revenue Potential</title>
+
+<style>
+:root {
+  --blue: #2b6cb0;
+  --blue-600: #2c5282;
+  --grey-50: #f6f8fb;
+  --grey-100: #eef2f6;
+  --grey-300: #cfd8e3;
+  --grey-700: #3e4c59;
+  --orange: #f29d38;
+  --white: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--grey-50);
+  padding: 24px;
+  display: grid;
+  place-items: start center;
+}
+
+.card {
+  width: min(720px, 95vw);
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(44,82,130,.08);
+}
+
+h1 {
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+
+.subhead {
+  margin-bottom: 16px;
+  opacity: .9;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.stat {
+  background: var(--grey-100);
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.stat label {
+  font-weight: 700;
+  color: var(--blue-600);
+  font-size: .9rem;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.stat input {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.small {
+  font-size: .75rem;
+  opacity: .7;
+  margin-top: 4px;
+}
+
+.contract {
+  margin-bottom: 16px;
+}
+
+.contract label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: var(--blue-600);
+}
+
+.contract-options {
+  display: flex;
+  gap: 20px;
+}
+
+.slider-row {
+  margin: 14px 0;
+}
+
+input[type="range"] {
+  width: 100%;
+  height: 8px;
+  border-radius: 8px;
+  background: var(--grey-300);
+}
+
+.minmax {
+  display: flex;
+  justify-content: space-between;
+  font-size: .85rem;
+  margin-top: 6px;
+}
+
+.result {
+  margin-top: 16px;
+  background: var(--grey-100);
+  padding: 14px;
+  border-radius: 10px;
+}
+
+.result .label {
+  font-weight: 700;
+  color: var(--blue-600);
+}
+
+.result .value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--blue);
+}
+
+.footer-note {
+  margin-top: 14px;
+  font-size: .75rem;
+  opacity: .6;
+  text-align: center;
+}
+</style>
 </head>
+
 <body>
-  <div class="card" role="region" aria-labelledby="title">
-    <h1 id="title">What If You Increased Your Safetrip® Penetration % ? </h1>
-    <div class="subhead">Slide to compare your current FYTD revenue with your potential revenue in District 1, 2, 3, 4, and 5..</div>
+<div class="card">
 
-    <div class="row">
-      <div class="stat">
-        <div class="label">Total Revenue (Current FYTD)</div>
-        <div class="value" id="totalLabel">$1,309,000</div>
-      </div>
-      <div class="stat">
-        <div class="label">Potential Revenue</div>
-        <div class="value" id="possibleLabel">$4,000,000</div>
-      </div>
-    </div>
-    <div id="warn" class="note">Note: Possible Revenue can’t be less than Total Revenue. Adjusted to match Total.</div>
+<h1>Safetrip® Revenue Potential Calculator</h1>
+<div class="subhead">Enter FYTD sales and select contract type to estimate revenue.</div>
 
-    <div class="slider-row">
-      <div class="slider-header">
-        <div class="left">Slide to see Potential Revenue</div>
-        <div class="right" aria-live="polite"><span id="percent">0</span>%</div>
-      </div>
-      <input id="slider" type="range" min="0" max="100" value="0" step="1" aria-label="Slide to see Potential Revenue">
-      <div class="minmax">
-        <div>Min (Total): <strong id="minLabel">$1,309,000</strong></div>
-        <div>Max (Possible): <strong id="maxLabel">$4,000,000</strong></div>
-      </div>
-    </div>
-
-    <div class="result">
-      <div class="label">Total Revenue</div>
-      <div class="value" id="projected" aria-live="polite">$1,309,000</div>
-      <div class="detail">
-        <span class="chip">Increase vs Total: <span id="incPct">0%</span></span>
-        <span class="chip">Revenue Change: <span id="delta">$0</span></span>
-      </div>
-    </div>
-
-    <div class="defaults" aria-hidden="true">
-      Defaults set in code: Current FYTD Revenue=<code id="totalDefault">$1,309,000</code>, Potential (if 100% of customer transactions had Safetrip®)=<code id="possibleDefault">$4,000,000</code>
-    </div>
+<div class="row">
+  <div class="stat">
+    <label>Current FYTD Sales (Min)</label>
+    <input type="number" id="minSales" value="12500">
+    <div class="small">Sales (not revenue)</div>
   </div>
 
-  
+  <div class="stat">
+    <label>Possible FYTD Sales (Max)</label>
+    <input type="number" id="maxSales" value="25000">
+    <div class="small">Sales (not revenue)</div>
+  </div>
+</div>
 
+<div class="contract">
+  <label>Contract Type</label>
+  <div class="contract-options">
+    <div>
+      <input type="radio" name="contract" value="3.75" checked> In-Town
+      <div class="small">$3.75 profit</div>
+    </div>
+    <div>
+      <input type="radio" name="contract" value="5.25"> One-Way
+      <div class="small">$5.25 profit</div>
+    </div>
+  </div>
+</div>
 
-<script defer src="safetrip-calculator.js?v=1"></script>
+<div class="slider-row">
+  <label><strong>Slide to See Revenue Potential</strong> (<span id="percent">0</span>%)</label>
+  <input id="slider" type="range" min="0" max="100" value="0">
+  <div class="minmax">
+    <div>Min Sales: <strong id="minLabel">12,500</strong></div>
+    <div>Max Sales: <strong id="maxLabel">25,000</strong></div>
+  </div>
+</div>
+
+<div class="result">
+  <div class="label">Projected Revenue</div>
+  <div class="value" id="projected">$0</div>
+  <div class="small">Selected Sales × Contract Profit</div>
+</div>
+
+<div class="footer-note">
+  All figures are hypothetical and for estimation purposes only.
+</div>
+
+</div>
+
+<script defer src="safetrip-calculator.js"></script>
 </body>
 </html>
+
 
 
 
