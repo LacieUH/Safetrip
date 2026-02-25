@@ -27,6 +27,12 @@ function getSelectedRate() {
   );
 }
 
+// Update slider background
+function updateSliderFill() {
+  const percent = slider.value;
+  slider.style.background = `linear-gradient(90deg, var(--orange) 0% ${percent}%, var(--grey-300) ${percent}% 100%)`;
+}
+
 // Update function
 function updateCalculator() {
   minLabel.textContent = MIN_SALES.toLocaleString();
@@ -34,6 +40,8 @@ function updateCalculator() {
 
   const percent = parseFloat(slider.value);
   percentEl.textContent = percent;
+
+  updateSliderFill();
 
   const selectedSales = MIN_SALES + (MAX_SALES - MIN_SALES) * (percent / 100);
   const revenue = selectedSales * getSelectedRate();
@@ -49,6 +57,7 @@ contractRadios.forEach(radio =>
 
 // Initialize
 updateCalculator();
+
 
 
 
