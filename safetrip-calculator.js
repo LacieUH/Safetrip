@@ -1,6 +1,5 @@
 console.log("Safetrip Calculator Loaded");
 
-// DOM
 const minSalesInput = document.getElementById("minSales");
 const maxSalesInput = document.getElementById("maxSales");
 const slider = document.getElementById("slider");
@@ -8,10 +7,8 @@ const percentEl = document.getElementById("percent");
 const projectedEl = document.getElementById("projected");
 const minLabel = document.getElementById("minLabel");
 const maxLabel = document.getElementById("maxLabel");
-
 const contractRadios = document.querySelectorAll("input[name='contract']");
 
-// Helpers
 function formatNumber(n) {
   return n.toLocaleString("en-US");
 }
@@ -45,15 +42,12 @@ function updateCalculator() {
   const percent = parseFloat(slider.value);
   percentEl.textContent = percent;
 
-  const selectedSales =
-    minSales + (maxSales - minSales) * (percent / 100);
-
+  const selectedSales = minSales + (maxSales - minSales) * (percent / 100);
   const revenue = selectedSales * getSelectedRate();
 
   projectedEl.textContent = toUSD(Math.round(revenue));
 }
 
-// Events
 slider.addEventListener("input", updateCalculator);
 minSalesInput.addEventListener("input", updateCalculator);
 maxSalesInput.addEventListener("input", updateCalculator);
@@ -61,5 +55,5 @@ contractRadios.forEach(radio =>
   radio.addEventListener("change", updateCalculator)
 );
 
-// Init
 updateCalculator();
+
