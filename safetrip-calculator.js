@@ -1,81 +1,65 @@
-/*************************************************************
- * EDIT THESE DEFAULTS
- *************************************************************/
-const DEFAULT_TOTAL = 1309000;     // Total Revenue (Calendar Year)
-const DEFAULT_POSSIBLE = 4000000;  // Possible/Projected Revenue
+console.log("Safetrip Calculator Loaded");
 
-// ---- DOM ----
-console.log('Safetrip JS loaded');
-const totalLabel = document.getElementById('totalLabel');
-const possibleLabel = document.getElementById('possibleLabel');
-const totalDefault = document.getElementById('totalDefault');
-const possibleDefault = document.getElementById('possibleDefault');
+// DOM
+const minSalesInput = document.getElementById("minSales");
+const maxSalesInput = document.getElementById("maxSales");
+const slider = document.getElementById("slider");
+const percentEl = document.getElementById("percent");
+const projectedEl = document.getElementById("projected");
+const minLabel = document.getElementById("minLabel");
+const maxLabel = document.getElementById("maxLabel");
 
-const warnEl = document.getElementById('warn');
-const slider = document.getElementById('slider');
-const percentEl = document.getElementById('percent');
-const projectedEl = document.getElementById('projected');
-const minLabel = document.getElementById('minLabel');
-const maxLabel = document.getElementById('maxLabel');
-const incPctEl = document.getElementById('incPct');
-const deltaEl = document.getElementById('delta');
+const contractRadios = document.querySelectorAll("input[name='contract']");
 
-// ---- Helpers ----
+// Helpers
+function formatNumber(n) {
+  return n.toLocaleString("en-US");
+}
+
 function toUSD(n) {
-  return n.toLocaleString('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 0
+  return n.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2
   });
 }
-function setSliderFill(sliderEl, percent) {
-  sliderEl.style.background =
-    `linear-gradient(90deg, var(--blue) 0% ${percent}%, var(--grey-300) ${percent}% 100%)`;
+
+function getSelectedRate() {
+  return parseFloat(
+    document.querySelector("input[name='contract']:checked").value
+  );
 }
 
-// ---- State ----
-let total = DEFAULT_TOTAL;
-let possible = DEFAULT_POSSIBLE;
+function updateCalculator() {
+  let minSales = parseFloat(minSalesInput.value) || 0;
+  let maxSales = parseFloat(maxSalesInput.value) || 0;
 
-// ---- Logic ----
-function clampPossible() {
-  if (possible < total) {
-    possible = total;
-    warnEl.style.display = 'block';
-  } else {
-    warnEl.style.display = 'none';
+  if (maxSales < minSales) {
+    maxSales = minSales;
+    maxSalesInput.value = minSales;
   }
+
+  minLabel.textContent = formatNumber(minSales);
+  maxLabel.textContent = formatNumber(maxSales);
+
+  const percent = parseFloat(slider.value);
+  percentEl.textContent = percent;
+
+  const selectedSales =
+    minSales + (maxSales - minSales) * (percent / 100);
+
+  const revenue = selectedSales * getSelectedRate();
+
+  projectedEl.textContent = toUSD(Math.round(revenue));
 }
 
-function refreshStaticLabels() {
-  totalLabel.textContent = toUSD(total);
-  possibleLabel.textContent = toUSD(possible);
-  minLabel.textContent = toUSD(total);
-  maxLabel.textContent = toUSD(possible);
-  totalDefault.textContent = toUSD(total);
-  possibleDefault.textContent = toUSD(possible);
-}
+// Events
+slider.addEventListener("input", updateCalculator);
+minSalesInput.addEventListener("input", updateCalculator);
+maxSalesInput.addEventListener("input", updateCalculator);
+contractRadios.forEach(radio =>
+  radio.addEventListener("change", updateCalculator)
+);
 
-function updateProjectionFromSlider() {
-  const p = Number(slider.value); // 0..100
-  percentEl.textContent = p;
-  setSliderFill(slider, p);
-
-  // Linear interpolation from total (0%) to possible (100%)
-  const projected = Math.round(total + (possible - total) * (p / 100));
-  projectedEl.textContent = toUSD(projected);
-
-  const delta = projected - total;
-  const incPct = total === 0 ? 0 : (delta / total) * 100;
-  incPctEl.textContent = `${incPct.toFixed(0)}%`;
-  deltaEl.textContent = toUSD(delta);
-}
-
-// ---- Init ----
-(function boot() {
-  clampPossible();
-  refreshStaticLabels();
-  setSliderFill(slider, Number(slider.value));
-  updateProjectionFromSlider();
-  slider.addEventListener('input', updateProjectionFromSlider);
-})();
+// Init
+updateCalculator();
