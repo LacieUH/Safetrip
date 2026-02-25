@@ -21,35 +21,43 @@ function toUSD(n) {
   });
 }
 
+function formatNumber(n) {
+  return n.toLocaleString("en-US");
+}
+
 function getSelectedRate() {
   return parseFloat(
     document.querySelector("input[name='contract']:checked").value
   );
 }
 
-// Update slider background
-function updateSliderFill() {
-  const percent = slider.value;
+// Update slider background fill
+function updateSliderFill(percent) {
   slider.style.background = `linear-gradient(90deg, var(--orange) 0% ${percent}%, var(--grey-300) ${percent}% 100%)`;
 }
 
-// Update function
+// Main update function
 function updateCalculator() {
-  minLabel.textContent = MIN_SALES.toLocaleString();
-  maxLabel.textContent = MAX_SALES.toLocaleString();
-
   const percent = parseFloat(slider.value);
-  percentEl.textContent = percent;
 
-  updateSliderFill();
-
+  // Calculate selected sales
   const selectedSales = MIN_SALES + (MAX_SALES - MIN_SALES) * (percent / 100);
-  const revenue = selectedSales * getSelectedRate();
 
+  // Update slider fill
+  updateSliderFill(percent);
+
+  // Update labels
+  minLabel.textContent = formatNumber(MIN_SALES);
+  maxLabel.textContent = formatNumber(MAX_SALES);
+
+  percentEl.textContent = `${percent}% (${formatNumber(Math.round(selectedSales))} sales)`;
+
+  // Calculate revenue
+  const revenue = selectedSales * getSelectedRate();
   projectedEl.textContent = toUSD(Math.round(revenue));
 }
 
-// Event Listeners
+// Event listeners
 slider.addEventListener("input", updateCalculator);
 contractRadios.forEach(radio =>
   radio.addEventListener("change", updateCalculator)
@@ -57,6 +65,7 @@ contractRadios.forEach(radio =>
 
 // Initialize
 updateCalculator();
+
 
 
 
