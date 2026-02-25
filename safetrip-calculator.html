@@ -45,11 +45,15 @@ h1 {
   opacity: .9;
 }
 
-.row {
+.container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-bottom: 16px;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+}
+
+.inputs {
+  display: grid;
+  gap: 16px;
 }
 
 .stat {
@@ -131,6 +135,15 @@ input[type="range"] {
   color: var(--blue);
 }
 
+.instructions {
+  background: var(--grey-50);
+  border: 1px solid var(--grey-300);
+  padding: 12px;
+  border-radius: 10px;
+  font-size: .85rem;
+  color: var(--grey-700);
+}
+
 .footer-note {
   margin-top: 14px;
   font-size: .75rem;
@@ -146,47 +159,62 @@ input[type="range"] {
 <h1>Safetrip® Revenue Potential Calculator</h1>
 <div class="subhead">Enter FYTD sales and select contract type to estimate revenue.</div>
 
-<div class="row">
-  <div class="stat">
-    <label>Current FYTD Sales (Min)</label>
-    <input type="number" id="minSales" value="12500">
-    <div class="small">Sales (not revenue)</div>
-  </div>
+<div class="container">
+  <div class="inputs">
+    <div class="row">
+      <div class="stat">
+        <label>Current FYTD Sales (Min)</label>
+        <input type="number" id="minSales" placeholder="">
+        <div class="small">Sales (not revenue)</div>
+      </div>
 
-  <div class="stat">
-    <label>Possible FYTD Sales (Max)</label>
-    <input type="number" id="maxSales" value="25000">
-    <div class="small">Sales (not revenue)</div>
-  </div>
-</div>
-
-<div class="contract">
-  <label>Contract Type</label>
-  <div class="contract-options">
-    <div>
-      <input type="radio" name="contract" value="3.75" checked> In-Town
-      <div class="small">$3.75 profit</div>
+      <div class="stat">
+        <label>Possible FYTD Sales (Max)</label>
+        <input type="number" id="maxSales" placeholder="">
+        <div class="small">Sales (not revenue)</div>
+      </div>
     </div>
-    <div>
-      <input type="radio" name="contract" value="5.25"> One-Way
-      <div class="small">$5.25 profit</div>
+
+    <div class="contract">
+      <label>Contract Type</label>
+      <div class="contract-options">
+        <div>
+          <input type="radio" name="contract" value="3.75" checked> In-Town
+          <div class="small">$3.75 profit</div>
+        </div>
+        <div>
+          <input type="radio" name="contract" value="5.25"> One-Way
+          <div class="small">$5.25 profit</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slider-row">
+      <label><strong>Slide to See Revenue Potential</strong> (<span id="percent">0</span>%)</label>
+      <input id="slider" type="range" min="0" max="100" value="0">
+      <div class="minmax">
+        <div>Min Sales: <strong id="minLabel">0</strong></div>
+        <div>Max Sales: <strong id="maxLabel">0</strong></div>
+      </div>
+    </div>
+
+    <div class="result">
+      <div class="label">Projected Revenue</div>
+      <div class="value" id="projected">$0</div>
+      <div class="small">Selected Sales × Contract Profit</div>
     </div>
   </div>
-</div>
 
-<div class="slider-row">
-  <label><strong>Slide to See Revenue Potential</strong> (<span id="percent">0</span>%)</label>
-  <input id="slider" type="range" min="0" max="100" value="0">
-  <div class="minmax">
-    <div>Min Sales: <strong id="minLabel">12,500</strong></div>
-    <div>Max Sales: <strong id="maxLabel">25,000</strong></div>
+  <div class="instructions">
+    <strong>Instructions:</strong>
+    <ul>
+      <li>Enter your current FYTD sales in the left field.</li>
+      <li>Enter the maximum possible FYTD sales in the right field.</li>
+      <li>Select a contract type to apply profit per trip.</li>
+      <li>Use the slider to see how revenue changes between minimum and maximum sales.</li>
+      <li>All results are hypothetical estimates, not actual company data.</li>
+    </ul>
   </div>
-</div>
-
-<div class="result">
-  <div class="label">Projected Revenue</div>
-  <div class="value" id="projected">$0</div>
-  <div class="small">Selected Sales × Contract Profit</div>
 </div>
 
 <div class="footer-note">
@@ -198,6 +226,7 @@ input[type="range"] {
 <script defer src="safetrip-calculator.js"></script>
 </body>
 </html>
+
 
 
 
