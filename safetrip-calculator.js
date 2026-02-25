@@ -1,8 +1,10 @@
 console.log("Safetrip Calculator Loaded");
 
+// Constants
+const MIN_SALES = 0;
+const MAX_SALES = 15000;
+
 // DOM Elements
-const minSalesInput = document.getElementById("minSales");
-const maxSalesInput = document.getElementById("maxSales");
 const slider = document.getElementById("slider");
 const percentEl = document.getElementById("percent");
 const projectedEl = document.getElementById("projected");
@@ -11,10 +13,6 @@ const maxLabel = document.getElementById("maxLabel");
 const contractRadios = document.querySelectorAll("input[name='contract']");
 
 // Helpers
-function formatNumber(n) {
-  return n.toLocaleString("en-US");
-}
-
 function toUSD(n) {
   return n.toLocaleString("en-US", {
     style: "currency",
@@ -29,41 +27,28 @@ function getSelectedRate() {
   );
 }
 
-// Main update function
+// Update function
 function updateCalculator() {
-  const minSales = parseFloat(minSalesInput.value) || 0;
-  const maxSales = parseFloat(maxSalesInput.value) || 0;
-
-  // Update labels
-  minLabel.textContent = formatNumber(minSales);
-  maxLabel.textContent = formatNumber(maxSales);
+  minLabel.textContent = MIN_SALES.toLocaleString();
+  maxLabel.textContent = MAX_SALES.toLocaleString();
 
   const percent = parseFloat(slider.value);
   percentEl.textContent = percent;
 
-  // Calculate selected sales
-  let selectedSales;
-  if (maxSales < minSales) {
-    // If Max < Min, just use Min for calculation
-    selectedSales = minSales;
-  } else {
-    selectedSales = minSales + (maxSales - minSales) * (percent / 100);
-  }
-
-  // Calculate revenue
+  const selectedSales = MIN_SALES + (MAX_SALES - MIN_SALES) * (percent / 100);
   const revenue = selectedSales * getSelectedRate();
+
   projectedEl.textContent = toUSD(Math.round(revenue));
 }
 
 // Event Listeners
 slider.addEventListener("input", updateCalculator);
-minSalesInput.addEventListener("input", updateCalculator);
-maxSalesInput.addEventListener("input", updateCalculator);
 contractRadios.forEach(radio =>
   radio.addEventListener("change", updateCalculator)
 );
 
 // Initialize
 updateCalculator();
+
 
 
