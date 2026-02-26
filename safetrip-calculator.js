@@ -1,8 +1,8 @@
 console.log("Safetrip Calculator Loaded");
 
 // Constants
-const MIN_SALES = 0;
-const MAX_SALES = 30000;
+const MIN_PURCHASES = 0;
+const MAX_PURCHASES = 30000;
 
 // DOM Elements
 const slider = document.getElementById("slider");
@@ -40,20 +40,20 @@ function updateSliderFill(percent) {
 function updateCalculator() {
   const percent = parseFloat(slider.value);
 
-  // Calculate selected sales
-  const selectedSales = MIN_SALES + (MAX_SALES - MIN_SALES) * (percent / 100);
+  // Calculate selected Purchases
+  const selectedPurchases = MIN_PURCHASES + (MAX_PURCHASES - MIN_PURCHASES) * (percent / 100);
 
   // Update slider fill
   updateSliderFill(percent);
 
   // Update labels
-  minLabel.textContent = formatNumber(MIN_SALES);
-  maxLabel.textContent = formatNumber(MAX_SALES);
+  minLabel.textContent = formatNumber(MIN_PURCHASES);
+  maxLabel.textContent = formatNumber(MAX_PURCHASES);
 
-  percentEl.textContent = `${percent}% (${formatNumber(Math.round(selectedSales))} sales)`;
+  percentEl.textContent = `${percent}% (${formatNumber(Math.round(selectedPurchases))} purchases)`;
 
   // Calculate revenue
-  const revenue = selectedSales * getSelectedRate();
+  const revenue = selectedPurchases * getSelectedRate();
   projectedEl.textContent = toUSD(Math.round(revenue));
 }
 
@@ -65,6 +65,7 @@ contractRadios.forEach(radio =>
 
 // Initialize
 updateCalculator();
+
 
 
 
