@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Safetrip® Revenue Potential</title>
+<title>Safetrip® Potential Penetration Calculator</title>
 
 <style>
 :root {
@@ -164,9 +164,9 @@ input[type="range"]::-moz-range-thumb {
 
 <div class="card">
 
-<h1>Safetrip® Revenue Potential Calculator</h1>
+<h1>Safetrip® Potential Penetration Calculator</h1>
 <div class="subhead">
-Slide to estimate revenue based on sales and selected contract type.
+Slide to estimate income based on purchases and selected contract type.
 </div>
 
 <!-- Contract Type -->
@@ -188,14 +188,14 @@ Slide to estimate revenue based on sales and selected contract type.
 <div class="slider-row">
   <div class="slider-header">
     <span>Slide to See Revenue Potential</span>
-    <span id="percent">0% (0 sales)</span>
+    <span id="percent">0% (0 purchases)</span>
   </div>
 
   <input id="slider" type="range" min="0" max="100" value="0">
 
   <div class="minmax">
-    <div>Min Sales: <strong id="minLabel">0</strong></div>
-    <div>Max Sales: <strong id="maxLabel">30,000</strong></div>
+    <div>Min Purchases: <strong id="minLabel">0</strong></div>
+    <div>Max Purchases: <strong id="maxLabel">30,000</strong></div>
   </div>
 </div>
 
@@ -203,7 +203,7 @@ Slide to estimate revenue based on sales and selected contract type.
 <div class="result">
   <div class="label">Projected Revenue</div>
   <div class="value" id="projected">$0.00</div>
-  <div class="small">Selected Sales × Contract Income</div>
+  <div class="small">Selected Purchases × Contract Income</div>
 </div>
 
 <div class="footer-note">
@@ -216,6 +216,7 @@ All figures are hypothetical and for estimation purposes only.
 
 </body>
 </html>
+
 
 
 
